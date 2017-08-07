@@ -16,7 +16,15 @@ body {
        width: 100%;
    }
 }
-
+.hidden {
+    display: none;
+}
+form.addproduct {
+    margin: .5em 1em;
+}
+.container.shop {
+    margin-top: 1em;
+}
 blockquote {
 	background: white;
 }
@@ -98,4 +106,11 @@ blockquote {
 {
     display: block;
     margin-top: 10px;
+}
+.imgcontainer {
+    text-align: center;
+    margin-top: 1em;
+}
+.imgcontainer > img {
+    max-height: 125px;
 }
