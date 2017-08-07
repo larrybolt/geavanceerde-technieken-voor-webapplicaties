@@ -1,5 +1,7 @@
 package ucll.gtw.larry.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ucll.gtw.larry.domain.shop.Product;
 import ucll.gtw.larry.domain.shop.ProductRepository;
 import ucll.gtw.larry.domain.user.User;
@@ -22,6 +24,16 @@ public class ShopController extends BaseController {
                 response.sendRedirect("/login");
         } catch (ServletException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getJSONProducts(HttpServletRequest request, HttpServletResponse response) {
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.create();
+        try {
+            response.getWriter().write(gson.toJson(productRepository.getAll()));
         } catch (IOException e) {
             e.printStackTrace();
         }

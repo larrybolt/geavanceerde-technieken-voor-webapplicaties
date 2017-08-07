@@ -42,6 +42,9 @@ public class Router extends HttpServlet {
             case "/logout":
                 userController.handleLogout(request, response);
                 break;
+            case "/products.json":
+                shopController.getJSONProducts(request, response);
+                break;
             case "/":
                 shopController.handleIndex(request, response);
                 break;
