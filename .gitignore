@@ -10,6 +10,7 @@ reated by https://www.gitignore.io/api/java,maven,intellij,java-web
 .idea/dictionaries
 
 # Sensitive or high-churn files:
+kotlinc.xml
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.xml
