@@ -1,8 +1,9 @@
 package ucll.gtw.larry.domain.user;
 
 import lombok.*;
-import org.joda.time.LocalDateTime;
 import org.mindrot.jbcrypt.BCrypt;
+
+import java.time.LocalDate;
 
 @Data public class User {
     private int userId;
@@ -12,7 +13,7 @@ import org.mindrot.jbcrypt.BCrypt;
     @NonNull private String email;
     @NonNull private Gender gender;
     @NonNull private Role role;
-    @NonNull private LocalDateTime dateOfBirth;
+    @NonNull private LocalDate dateOfBirth;
     // hashed password with salt, see https://en.wikipedia.org/wiki/Bcrypt
     @Setter(AccessLevel.PACKAGE) private String hashedPassword;
 

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
     private int productId;
     @NonNull private String name;
     @NonNull private String description;
+    @NonNull private String imageUrl;
     @NonNull private BigDecimal price;
     @NonNull private String stock;
 }

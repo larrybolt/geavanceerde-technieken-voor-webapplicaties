@@ -3,4 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Router</servlet-name>
+        <url-pattern></url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Router</servlet-name>
+        <servlet-class>ucll.gtw.larry.Router</servlet-class>
+    </servlet>
 </web-app>
