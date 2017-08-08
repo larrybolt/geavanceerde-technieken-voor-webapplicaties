@@ -37,8 +37,8 @@ public class ShopController extends BaseController {
             if (fromString != null) {
                 from = Integer.parseInt(fromString);
             }
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
             Writer writer = response.getWriter();
             writer.write(gson.toJson(productRepository.getFrom(from)));
         } catch (IOException e) {
