@@ -8,11 +8,11 @@
         <url-pattern>/static/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Router</servlet-name>
+        <servlet-name>App</servlet-name>
         <url-pattern></url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>Router</servlet-name>
-        <servlet-class>ucll.gtw.larry.Router</servlet-class>
+        <servlet-name>App</servlet-name>
+        <servlet-class>ucll.gtw.larry.App</servlet-class>
     </servlet>
 </web-app>

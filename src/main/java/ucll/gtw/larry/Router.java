@@ -1,5 +1,6 @@
 package ucll.gtw.larry;
 
+import lombok.AllArgsConstructor;
 import ucll.gtw.larry.controller.*;
 
 import javax.servlet.ServletException;
@@ -11,41 +12,37 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebServlet("/")
-public class Router extends HttpServlet {
+@AllArgsConstructor
+public class Router {
 	private static final long serialVersionUID = 1L;
 
-	private UserController userController = new UserController();
-    private ShopController shopController = new ShopController();
-
-	public Router() {
-		super();
-	}
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    handle(request, response);
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        handle(request, response);
-	}
+	private UserController userController;
+    private ShopController shopController;
+    private ProductController productController;
 
 	protected void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
         String requestURI = request.getRequestURI();
+        String requestResource;
+        if (requestURI.equals("/"))
+            requestResource = "index";
+        else {
+            requestResource = requestURI.split("/")[1];
+        }
 
-        switch (requestURI) {
-            case "/login":
+        switch (requestResource) {
+            case "login":
                 userController.handleLogin(request, response);
             break;
-            case "/signup":
+            case "signup":
                 userController.handleSignup(request, response);
                 break;
-            case "/logout":
+            case "logout":
                 userController.handleLogout(request, response);
                 break;
-            case "/products.json":
+            case "products.json":
                 shopController.getJSONProducts(request, response);
                 break;
-            case "/":
+            case "index":
                 shopController.handleIndex(request, response);
                 break;
             default:

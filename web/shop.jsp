@@ -12,13 +12,10 @@
         <div class="collapse navbar-collapse" id="navbarExample">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Shop <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+                    <a class="nav-link" href="#">Blog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Logout, ${user.userName}</a>
@@ -38,35 +35,35 @@
             <c:if test="${user.role == 'ADMIN'}">
                 <h3>Add Product</h3>
                 <hr>
-                <form class="addproduct" action="/addproduct" method="post">
+                <form action="/addproduct" method="post" id="addproduct">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Catchy product name">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Catchy product name" required="required">
                     </div>
                     <div class="form-group">
                         <label for="imgUrl">Image Url</label>
-                        <input type="url" class="form-control" id="imgUrl" placeholder="http://...">
+                        <input type="text" class="form-control" id="imgUrl" name="imgUrl" placeholder="http://..." required="required">
                     </div>
                     <div class="form-group">
                         <label for="price">Price</label>
-                        <input type="text" class="form-control" id="price" placeholder="999.99">
+                        <input type="text" class="form-control" id="price" name="price" placeholder="999.99" required="required">
                     </div>
                     <div class="form-group">
-                        <label for="exampleSelect1">Stock status</label>
-                        <select class="form-control" id="exampleSelect1">
-                            <option>plenty in stock</option>
-                            <option>few left in stock</option>
-                            <option>sold out</option>
-                            <option>(custom)</option>
+                        <label for="stockstatus">Stock status</label>
+                        <select class="form-control" name="stockstatus" id="stockstatus">
+                            <option value="plenty in stock">plenty in stock</option>
+                            <option value="few left in stock">few left in stock</option>
+                            <option value="sold out">sold out</option>
+                            <option value="custom">(custom)</option>
                         </select>
                     </div>
-                    <div class="form-group hidden">
-                        <label for="price">Custom Stock status</label>
-                        <input type="text" class="form-control" id="stockstatuscustom" placeholder="Delivered soon">
+                    <div class="form-group hidden" id="customstockstatus">
+                        <label for="stockstatuscustom">Custom Stock status</label>
+                        <input type="text" class="form-control" name="customstockstatus" id="stockstatuscustom" placeholder="Delivered soon">
                     </div>
                     <div class="form-group">
                         <label for="desc">Description</label>
-                        <textarea class="form-control" id="desc" rows="3"></textarea>
+                        <textarea class="form-control" id="desc" name="description" rows="3"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Add Product</button>
                 </form>
@@ -84,7 +81,7 @@
                         <div class="card h-100">
                             <a href="/product/${product.productId}" class="imgcontainer"><img class="card-img-top img-fluid" src="${product.imageUrl}" alt=""></a>
                             <div class="card-block">
-                                <h4 class="card-title"><a href="#">${product.name}</a></h4>
+                                <h4 class="card-title"><a href="/product/${product.productId}">${product.name}</a></h4>
                                 <h5>$<c:out value="${product.price}"></c:out></h5>
                                 <p class="card-text"><c:out value="${product.description}"></c:out></p>
                             </div>
@@ -108,4 +105,7 @@
 
 </div>
 <!-- /.container -->
+<c:if test="${user.role == 'ADMIN'}">
+<script src="/static/javascript/shop-admin.js"></script>
+</c:if>
 <%@ include file="footer.jspf"%>

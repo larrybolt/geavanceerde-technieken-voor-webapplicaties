@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class ProductRepository {
-    private Map<Integer, Product> products = new HashMap<>();
+    private Map<Integer, Product> products = new TreeMap<>();
 
     public ProductRepository() {
         add(new Product(
@@ -53,7 +53,7 @@ public class ProductRepository {
 
     // C
     public void add(Product p) {
-        int productId = products.size();
+        int productId = products.size()+1;
         p.setProductId(productId);
         products.put(p.getProductId(), p);
     }
@@ -65,6 +65,15 @@ public class ProductRepository {
 
     public ArrayList<Product> getAll() {
         return new ArrayList<>(products.values());
+    }
+
+    public ArrayList<Product> getFrom(int from) {
+        ArrayList<Product> products = new ArrayList<>();
+        for (Product p : this.products.values()) {
+            if (p.getProductId() >= from)
+                products.add(p);
+        }
+        return products;
     }
 
     // U
