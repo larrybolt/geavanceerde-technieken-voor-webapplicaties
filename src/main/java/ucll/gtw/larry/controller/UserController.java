@@ -1,5 +1,7 @@
 package ucll.gtw.larry.controller;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import ucll.gtw.larry.domain.user.InvalidLogin;
 import ucll.gtw.larry.domain.user.User;
 import ucll.gtw.larry.domain.user.UserRepository;
@@ -10,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@AllArgsConstructor
 public class UserController extends BaseController {
+
+    @Getter private UserRepository userRepository;
 
     public void handleLogin(HttpServletRequest request, HttpServletResponse response) {
         try {

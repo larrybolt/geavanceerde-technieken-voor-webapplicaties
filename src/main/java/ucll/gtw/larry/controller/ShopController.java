@@ -2,6 +2,8 @@ package ucll.gtw.larry.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import ucll.gtw.larry.domain.shop.Product;
 import ucll.gtw.larry.domain.shop.ProductRepository;
 import ucll.gtw.larry.domain.user.User;
@@ -12,13 +14,14 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 
+@AllArgsConstructor
 public class ShopController extends BaseController {
-    private ProductRepository productRepository = new ProductRepository();
+    @Getter private ProductRepository productRepository;
 
     public void handleIndex(HttpServletRequest request, HttpServletResponse response) {
         try {
             if (isLoggedIn(request, response)) {
-                request.setAttribute("products", productRepository.getAll());
+                request.setAttribute("products", getProductRepository().getAll());
                 request.getRequestDispatcher("/shop.jsp").forward(request, response);
             }
             else
@@ -40,7 +43,7 @@ public class ShopController extends BaseController {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             Writer writer = response.getWriter();
-            writer.write(gson.toJson(productRepository.getFrom(from)));
+            writer.write(gson.toJson(getProductRepository().getFrom(from)));
         } catch (IOException e) {
             e.printStackTrace();
         }

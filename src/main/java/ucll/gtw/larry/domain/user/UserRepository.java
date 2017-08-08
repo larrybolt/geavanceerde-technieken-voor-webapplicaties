@@ -13,33 +13,6 @@ public class UserRepository {
     private Map<Integer, User> users = new HashMap<Integer, User>();
 
     public UserRepository() {
-        this.createUser(
-                new User("user",
-                        "simple", "user",
-                        "user@example.com",
-                        Gender.FEMALE, Role.USER,
-                        LocalDate.of(1992, Month.MARCH, 12)
-                ),
-                "user" // password
-        );
-        this.createUser(
-                new User("support",
-                        "support", "user",
-                        "support@example.com",
-                        Gender.MALE, Role.SUPPORT,
-                        LocalDate.of(1993, Month.MARCH, 12)
-                ),
-                "support" // password
-        );
-        this.createUser(
-                new User("admin",
-                        "admin", "user",
-                        "admin@example.com",
-                        Gender.FEMALE, Role.ADMIN,
-                        LocalDate.of(1994, Month.MARCH, 12)
-                ),
-                "admin" // password
-        );
     }
 
     public void createUser(User user, String password) {
