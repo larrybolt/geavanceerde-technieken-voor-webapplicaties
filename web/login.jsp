@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jspf"%>
+<%@ include file="components/header.jspf"%>
     <!-- Navigation -->
     <nav class="navbar fixed-top navbar-toggleable-md navbar-inverse bg-inverse">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,4 +41,4 @@
     </div>
 </div>
 
-<%@ include file="footer.jspf"%>
+<%@ include file="components/footer.jspf"%>

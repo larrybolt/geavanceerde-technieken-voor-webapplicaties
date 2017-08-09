@@ -15,12 +15,13 @@ function getAllProducts(last_update_timestamp){
             parsed.products.forEach(function(product) {
                 var el = document.createElement('div');
                 el.innerHTML = template;
+                el.getElementsByClassName('product')[0].setAttribute('data-productid', product.productId);
                 el.getElementsByTagName('a')[0].href = '/product/'+product.productId;
                 el.getElementsByTagName('a')[1].href = '/product/'+product.productId;
                 el.getElementsByTagName('a')[1].innerHTML = product.name;
                 el.getElementsByClassName('template-productprice')[0].innerHTML = product.price;
                 el.getElementsByClassName('card-text')[0].innerHTML = product.description;
-                el.getElementsByTagName('small')[0].innerHTML = product.stock;
+                el.getElementsByClassName('stocktext')[0].innerHTML = product.stock;
                 el.getElementsByTagName('img')[0].src = product.imageUrl;
                 container.appendChild(el.children[0]);
             });

@@ -1,0 +1,20 @@
+<div class="col-lg-4 col-md-6 mb-4 product" data-productid="${product.productId}">
+    <div class="card h-100">
+        <a href="/products/${product.productId}" class="imgcontainer"><img class="card-img-top img-fluid" src="${product.imageUrl}" alt=""></a>
+        <div class="card-block">
+            <h4 class="card-title"><a href="/products/${product.productId}">${product.name}</a></h4>
+            <h5>$<span class="template-productprice"><c:out value="${product.price}"></c:out></span></h5>
+            <p class="card-text"><c:out value="${product.description}"></c:out></p>
+        </div>
+        <div class="card-footer">
+            <c:if test="${user.role == 'ADMIN'}">
+                <%@ include file="admin-product-stock.jspf" %>
+            </c:if>
+            <c:if test="${user.role != 'ADMIN'}">
+                <small class="text-muted">
+                    <span class="stocktext"><c:out value="${product.stock}"></c:out></span>
+                </small>
+            </c:if>
+        </div>
+    </div>
+</div>

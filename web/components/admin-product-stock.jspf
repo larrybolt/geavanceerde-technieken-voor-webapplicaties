@@ -1,0 +1,21 @@
+<small class="text-muted">
+    <span class="stocktext"><c:out value="${product.stock}"></c:out></span>
+    <a href="#" onclick="editproductstock(this)">(edit)</a>
+</small>
+<div class="productstockedit hidden">
+    <div class="form-group">
+        <select class="form-control" name="changestockstatus" onchange="stockstatuschange(this);">
+            <option selected disabled>(select)</option>
+            <c:forTokens items = "${stockoptions}" delims = ";" var = "option">
+                <option value="${option}">${option}</option>
+            </c:forTokens>
+            <option value="custom">custom</option>
+        </select>
+    </div>
+    <div class="customstockstatus input-group hidden">
+        <input type="text" class="form-control" name="customstockstatus" placeholder="Delivered soon">
+        <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button" onclick="stockstatuschange(this, true);">save</button>
+        </span>
+    </div>
+</div>

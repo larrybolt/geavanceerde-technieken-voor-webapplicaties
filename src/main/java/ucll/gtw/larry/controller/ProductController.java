@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ProductController extends BaseController {
@@ -26,7 +27,11 @@ public class ProductController extends BaseController {
     public void handle(String requestAction, HttpServletRequest request, HttpServletResponse response) {
         try {
             if (requestAction.equals("") && request.getMethod().equals("POST")) {
+                // post of new product
                 handleCreate(request, response);
+            } else if (isValidInt(requestAction) && request.getMethod().equals("POST")) {
+                // update of existing product
+                    handleUpdate(Integer.parseInt(requestAction), request, response);
             } else if (requestAction.equals("all")) {
                 handleReadAll(request, response);
             }
@@ -34,6 +39,33 @@ public class ProductController extends BaseController {
                 response.getWriter().write("action" + requestAction);
             }
         } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    private void handleUpdate(int productId, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            Product product = getProductRepository().get(productId);
+            String payload = request.getReader().lines().collect(Collectors.joining());
+            Product productChanges = new Gson().fromJson(payload, Product.class);
+            // name
+            if (productChanges.getName() != null)
+                product.setName(productChanges.getName());
+            // description
+            if (productChanges.getDescription() != null)
+                product.setDescription(productChanges.getDescription());
+            // imageUrl
+            if (productChanges.getImageUrl() != null)
+                product.setImageUrl(productChanges.getImageUrl());
+            // price
+            if (productChanges.getPrice() != null)
+                product.setPrice(productChanges.getPrice());
+            // price
+            if (productChanges.getStock() != null)
+                product.setStock(productChanges.getStock());
+            getProductRepository().update(product);
+            response.getWriter().write("{\"success\":true}");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void handleReadAll(HttpServletRequest request, HttpServletResponse response) {
@@ -68,6 +100,15 @@ public class ProductController extends BaseController {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private boolean isValidInt(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

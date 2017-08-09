@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ include file="header.jspf"%>
+<%@ include file="components/header.jspf"%>
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-toggleable-md navbar-inverse bg-inverse">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,59 +78,12 @@
             <div class="row" data-lastupdatetimestamp="${products_lastupdatetimestamp}" id="products">
 
                 <c:forEach items="${products}" var="product">
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="/products/${product.productId}" class="imgcontainer"><img class="card-img-top img-fluid" src="${product.imageUrl}" alt=""></a>
-                            <div class="card-block">
-                                <h4 class="card-title"><a href="/products/${product.productId}">${product.name}</a></h4>
-                                <h5>$<c:out value="${product.price}"></c:out></h5>
-                                <p class="card-text"><c:out value="${product.description}"></c:out></p>
-                            </div>
-                            <div class="card-footer">
-                                <c:if test="${user.role == 'ADMIN'}">
-                                    <small class="text-muted">
-                                    <div class="form-group">
-                                        <label for="stockstatus">Stock status</label>
-                                        <select class="form-control" name="changestockstatus" onchange="stockstatuschange(this);">
-                                            <c:forTokens items = "${stockoptions}" delims = ";" var = "option">
-                                                <option value="${option}">${option}</option>
-                                            </c:forTokens>
-                                            <option value="custom">custom</option>
-                                        </select>
-                                    </div>
-                                    <div class="customstockstatus input-group hidden">
-                                        <input type="text" class="form-control" name="customstockstatus" placeholder="Delivered soon">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-secondary" type="button" onclick="stockstatuschange(this, true);">save</button>
-                                        </span>
-                                    </div>
-                                    </small>
-                                </c:if>
-                                <c:if test="${user.role != 'ADMIN'}">
-                                    <small class="text-muted"><c:out value="${product.stock}"></c:out></small>
-                                </c:if>
-                            </div>
-                        </div>
-                    </div>
+                    <%@ include file="components/product.jspf" %>
                 </c:forEach>
 
-                <%--
-                --%>
             </div>
             <script id="product-template" type="javascript-template">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <a href="/products/PRODUCTID" class="imgcontainer"><img class="card-img-top img-fluid" src="PRODUCTURL" alt=""></a>
-                        <div class="card-block">
-                            <h4 class="card-title"><a href="/products/PRODUCTID">PRODUCTNAME</a></h4>
-                            <h5>$<span class="template-productprice"></span></h5>
-                            <p class="card-text">PRODUCTDESCRIPTION</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">PRODUCTSTOCK</small>
-                        </div>
-                    </div>
-                </div>
+                <%@ include file="components/product.jspf" %>
             </script>
             <!-- /.row -->
 
@@ -146,4 +99,4 @@
 <c:if test="${user.role == 'ADMIN'}">
 <script src="/static/javascript/shop-admin.js"></script>
 </c:if>
-<%@ include file="footer.jspf"%>
+<%@ include file="components/footer.jspf"%>

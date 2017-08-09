@@ -15,7 +15,15 @@ function ajaxCall(method, url, data) {
         xmlhttp.open(method, url, true); // 1
         // be a good citizen, do this so server knows it trough ajax
         xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+        if (data && typeof data === 'object')
+            data = JSON.stringify(data);
         xmlhttp.send(data);
         // 2
     })
+}
+
+function findAncestorByClassName (el, cls) {
+    while ((el = el.parentElement) && !el.classList.contains(cls));
+    return el;
 }

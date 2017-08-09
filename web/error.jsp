@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jspf"%>
+<%@ include file="components/header.jspf"%>
 <div class="container">
     <!-- Jumbotron -->
     <div class="jumbotron">
@@ -22,4 +22,4 @@
         </div>
     </div>
 </div>
-<%@ include file="footer.jspf"%>
+<%@ include file="components/footer.jspf"%>

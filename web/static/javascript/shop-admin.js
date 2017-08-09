@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
             : this.stockstatus.value;
 
         ajaxCall('POST', this.action, JSON.stringify(postData)).then(function(res){
-            console.log('it worked!', res);
         }, function(err){
             console.log('Error happened', err);
         });
@@ -38,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 function stockstatuschange(el, custom_submit) {
+    var submit = false, value = null, productId = null;
     if (!custom_submit) {
         if (el.value == 'custom') {
             var customStockStatusInputGroup = el.parentElement.parentElement.getElementsByClassName('customstockstatus')[0];
@@ -45,8 +45,24 @@ function stockstatuschange(el, custom_submit) {
             customStockStatusInputGroup.getElementsByTagName('input')[0].focus();
         } else {
             hideField(el.parentElement.parentElement.getElementsByClassName('customstockstatus')[0]);
+            submit = true; value = el.value;
         }
+    } else {
+        submit = true; value = el.parentElement.parentElement.getElementsByTagName('input')[0].value;
     }
+    if (submit) {
+        productId = findAncestorByClassName(el, 'product').getAttribute('data-productid');
+        console.log('change stock', productId, value);
+        ajaxCall('POST', '/products/'+productId, { stock: value}).then(function(res){
+
+        }, function(err){
+            alert('something went wrong:'+err);
+        })
+    }
+}
+
+function editproductstock(el) {
+    unHideField(el.parentElement.parentElement.getElementsByClassName('productstockedit')[0]);
 }
 
 function hideField(field){
