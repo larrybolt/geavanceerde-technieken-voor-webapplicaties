@@ -13,7 +13,7 @@ import java.io.IOException;
  * Hello world!
  *
  */
-@WebServlet("/")
+@WebServlet(urlPatterns = "/", loadOnStartup = 1)
 public class App extends HttpServlet
 {
     final private PicoContainer pico = AppModule.newContainer();
@@ -22,6 +22,7 @@ public class App extends HttpServlet
     public App() {
         super();
         router = pico.getComponent(Router.class);
+        System.out.println("yeee");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

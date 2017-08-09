@@ -7,12 +7,4 @@
         <servlet-name>default</servlet-name>
         <url-pattern>/static/*</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>App</servlet-name>
-        <url-pattern></url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>App</servlet-name>
-        <servlet-class>ucll.gtw.larry.App</servlet-class>
-    </servlet>
 </web-app>

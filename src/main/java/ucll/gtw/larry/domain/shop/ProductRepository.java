@@ -1,13 +1,27 @@
 package ucll.gtw.larry.domain.shop;
 
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.util.*;
 
 public class ProductRepository {
     private Map<Integer, Product> products = new TreeMap<>();
+    @Getter private int lastUpdateTimeStamp = 0;
 
-    public ProductRepository() {
+    private static ProductRepository instance = null;
+    protected ProductRepository() {
+        System.out.println("loaded instance of product repo");
+    }
 
+    private void _changes() {
+        lastUpdateTimeStamp = (int)(System.currentTimeMillis()/1000L);
+    }
+
+    public static ProductRepository getInstance() {
+        if (instance == null)
+            instance = new ProductRepository();
+        return instance;
     }
 
     // C
@@ -15,6 +29,7 @@ public class ProductRepository {
         int productId = products.size()+1;
         p.setProductId(productId);
         products.put(p.getProductId(), p);
+        _changes();
     }
 
     // R
@@ -38,10 +53,12 @@ public class ProductRepository {
     // U
     public void update(Product p){
         products.replace(p.getProductId(), p);
+        _changes();
     }
 
     // D
     public void remove(int productId) {
         products.remove(productId);
+        _changes();
     }
 }

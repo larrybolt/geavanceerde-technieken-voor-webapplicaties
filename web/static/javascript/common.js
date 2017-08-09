@@ -13,6 +13,8 @@ function ajaxCall(method, url, data) {
             }
         }
         xmlhttp.open(method, url, true); // 1
+        // be a good citizen, do this so server knows it trough ajax
+        xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xmlhttp.send(data);
         // 2
     })

@@ -7,6 +7,8 @@ import lombok.Getter;
 import ucll.gtw.larry.domain.shop.Product;
 import ucll.gtw.larry.domain.shop.ProductRepository;
 import ucll.gtw.larry.domain.user.User;
+import ucll.gtw.larry.domain.user.UserRepository;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,14 +16,20 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 
-@AllArgsConstructor
 public class ShopController extends BaseController {
     @Getter private ProductRepository productRepository;
+
+    public ShopController(UserRepository userRepository, ProductRepository productRepository) {
+        super(userRepository);
+        this.productRepository = productRepository;
+    }
 
     public void handleIndex(HttpServletRequest request, HttpServletResponse response) {
         try {
             if (isLoggedIn(request, response)) {
-                request.setAttribute("products", getProductRepository().getAll());
+
+                request.setAttribute("products", getProductRepository().getFrom(0));
+                request.setAttribute("products_lastupdatetimestamp", getProductRepository().getLastUpdateTimeStamp());
                 request.getRequestDispatcher("/shop.jsp").forward(request, response);
             }
             else

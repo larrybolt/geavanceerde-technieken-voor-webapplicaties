@@ -3,6 +3,7 @@ package ucll.gtw.larry;
 import org.picocontainer.DefaultPicoContainer;
 import org.picocontainer.MutablePicoContainer;
 import org.picocontainer.PicoContainer;
+import org.picocontainer.behaviors.Caching;
 import ucll.gtw.larry.controller.*;
 import ucll.gtw.larry.domain.shop.DummyShopData;
 import ucll.gtw.larry.domain.shop.ProductRepository;
@@ -14,7 +15,7 @@ import ucll.gtw.larry.domain.user.UserRepository;
  */
 public class AppModule {
     public static PicoContainer newContainer() {
-        final MutablePicoContainer pico = new DefaultPicoContainer();
+        final MutablePicoContainer pico = new DefaultPicoContainer(new Caching());
 
 
         // services / repositories
@@ -22,7 +23,7 @@ public class AppModule {
         DummyUserData.addData(userRepository);                // add dummy data,
         pico.addComponent(userRepository);                    // register in ioc
 
-        ProductRepository productRepository = new ProductRepository();
+        ProductRepository productRepository = ProductRepository.getInstance();
         DummyShopData.addData(productRepository);
         pico.addComponent(productRepository);
 

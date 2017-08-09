@@ -23,27 +23,36 @@ public class Router {
 	protected void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
         String requestResource;
+        String requestAction =  "";
         if (requestURI.equals("/"))
             requestResource = "index";
         else {
-            requestResource = requestURI.split("/")[1];
+            String[] requestURIparts = requestURI.split("/");
+            requestResource = requestURIparts[1];
+            if (requestURIparts.length > 2) {
+                requestAction = requestURIparts[2];
+            } else {
+                requestAction = "";
+            }
         }
 
         switch (requestResource) {
-            case "login":
-                userController.handleLogin(request, response);
-            break;
-            case "signup":
-                userController.handleSignup(request, response);
-                break;
-            case "logout":
-                userController.handleLogout(request, response);
-                break;
-            case "products.json":
-                shopController.getJSONProducts(request, response);
-                break;
+            // index
             case "index":
                 shopController.handleIndex(request, response);
+                break;
+
+            // shortcuts
+            case "login": userController.handleLogin(request, response); break;
+            case "signup": userController.handleSignup(request, response); break;
+            case "logout": userController.handleLogout(request, response); break;
+
+            case "products":
+                productController.handle(requestAction, request, response);
+            break;
+
+            case "products.json":
+                shopController.getJSONProducts(request, response);
                 break;
             default:
                 request.getRequestDispatcher("/error.jsp").forward(request, response);

@@ -18,6 +18,7 @@ public class DummyShopData {
                 BigDecimal.valueOf(1200),
                 "in stock"
         ));
+        /*
         productRepository.add(new Product(
                 "iPhone",
                 "The iPhone, first device with a decent touch-screen.",
@@ -46,5 +47,6 @@ public class DummyShopData {
                 BigDecimal.valueOf(40),
                 "none left"
         ));
+        */
     }
 }

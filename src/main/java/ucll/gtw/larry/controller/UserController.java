@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@AllArgsConstructor
 public class UserController extends BaseController {
 
-    @Getter private UserRepository userRepository;
+    public UserController(UserRepository userRepository) {
+        super(userRepository);
+    }
 
     public void handleLogin(HttpServletRequest request, HttpServletResponse response) {
         try {
