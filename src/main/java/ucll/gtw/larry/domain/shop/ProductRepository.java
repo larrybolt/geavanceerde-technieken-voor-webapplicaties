@@ -9,19 +9,8 @@ public class ProductRepository {
     private Map<Integer, Product> products = new TreeMap<>();
     @Getter private int lastUpdateTimeStamp = 0;
 
-    private static ProductRepository instance = null;
-    protected ProductRepository() {
-        System.out.println("loaded instance of product repo");
-    }
-
     private void _changes() {
         lastUpdateTimeStamp = (int)(System.currentTimeMillis()/1000L);
-    }
-
-    public static ProductRepository getInstance() {
-        if (instance == null)
-            instance = new ProductRepository();
-        return instance;
     }
 
     // C

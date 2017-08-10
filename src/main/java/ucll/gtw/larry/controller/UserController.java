@@ -2,6 +2,7 @@ package ucll.gtw.larry.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import ucll.gtw.larry.domain.blog.PostRepository;
 import ucll.gtw.larry.domain.user.InvalidLogin;
 import ucll.gtw.larry.domain.user.User;
 import ucll.gtw.larry.domain.user.UserRepository;
@@ -14,11 +15,15 @@ import java.io.PrintWriter;
 
 public class UserController extends BaseController {
 
-    public UserController(UserRepository userRepository) {
+    @Getter private PostRepository postRepository;
+
+    public UserController(UserRepository userRepository, PostRepository postRepository) {
         super(userRepository);
+        this.postRepository = postRepository;
     }
 
     public void handleLogin(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("posts", getPostRepository().getAll());
         try {
             if (request.getMethod().equals("GET")) {
                 request.getRequestDispatcher("/login.jsp").forward(request, response);

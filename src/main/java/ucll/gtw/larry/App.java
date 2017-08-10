@@ -16,13 +16,12 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/", loadOnStartup = 1)
 public class App extends HttpServlet
 {
-    final private PicoContainer pico = AppModule.newContainer();
+    final private PicoContainer pico = AppModule.getInstance().getContainer();
     private Router router;
 
     public App() {
         super();
         router = pico.getComponent(Router.class);
-        System.out.println("yeee");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

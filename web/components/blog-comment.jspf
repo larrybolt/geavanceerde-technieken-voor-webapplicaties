@@ -1,0 +1,4 @@
+<div class="comment">
+    <div><c:out value="${comment.comment}"></c:out></div>
+    <small>By <span class="name">${comment.name}</span></small>
+</div>
