@@ -5,6 +5,7 @@ import lombok.val;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class UserRepository {
                 throw new IllegalArgumentException("Email already in use");
             }
         }
-        val userId = users.size();
+        val userId = users.size()+1;
         user.setUserId(userId);
         user.hashAndSetPassword(password);
         users.put(userId, user);
@@ -35,7 +36,7 @@ public class UserRepository {
     }
 
     public List<User> getAll() {
-        return (List<User>) users.values();
+        return new ArrayList<User>(users.values());
     }
 
     public User loginUser(@NonNull String username, @NonNull String password) throws InvalidLogin {

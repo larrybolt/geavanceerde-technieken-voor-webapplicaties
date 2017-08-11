@@ -3,6 +3,8 @@ package ucll.gtw.larry.controller;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NonNull;
+import ucll.gtw.larry.domain.user.User;
 import ucll.gtw.larry.domain.user.UserRepository;
 
 import javax.servlet.ServletException;
@@ -14,14 +16,26 @@ import java.io.IOException;
 public class BaseController {
     @Getter private UserRepository userRepository;
 
-    protected boolean isLoggedIn(HttpServletRequest request, HttpServletResponse response) {
+    protected boolean isLoggedIn(HttpServletRequest request) {
         if (request.getSession().getAttribute("userid") == null) {
             return false;
         }
         else {
             int userId = (int)request.getSession().getAttribute("userid");
-            request.setAttribute("user", getUserRepository().get(userId));
+            User user = getUserRepository().get(userId);
+            request.setAttribute("user", user);
+            user.wasOnline();
             return true;
+        }
+    }
+
+    protected User getUser(HttpServletRequest request){
+        if (request.getSession().getAttribute("userid") == null) {
+            return null;
+        }
+        else {
+            int userId = (int)request.getSession().getAttribute("userid");
+            return getUserRepository().get(userId);
         }
     }
 

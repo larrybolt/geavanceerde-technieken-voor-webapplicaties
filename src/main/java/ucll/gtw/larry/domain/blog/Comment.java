@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
             return "Anonymous";
         else return name;
     }
+
     @Override
     public int compareTo(Comment comment) {
         return comment.getCommentId()-this.getCommentId();

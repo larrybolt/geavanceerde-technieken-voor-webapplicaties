@@ -19,6 +19,7 @@ public class Router {
 	private UserController userController;
     private ShopController shopController;
     private ProductController productController;
+    private ChatController chatController;
 
 	protected void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
@@ -50,6 +51,10 @@ public class Router {
             case "products":
                 productController.handle(requestAction, request, response);
             break;
+
+            case "chat":
+                chatController.handle(requestAction, request, response);
+                break;
 
             case "products.json":
                 shopController.getJSONProducts(request, response);

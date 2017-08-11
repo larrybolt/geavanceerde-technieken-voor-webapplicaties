@@ -19,6 +19,7 @@ function postComment(el) {
     console.log(arguments);
     var form = el;
     var comment = form.comment.value, name = form.name.value, postId = form.postId.value;
+    form.reset();
     ws.send(JSON.stringify({
         postId: postId,
         name: name,

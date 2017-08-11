@@ -137,3 +137,51 @@ blockquote {
 .imgcontainer > img {
     max-height: 125px;
 }
+
+
+/* chat */
+.chat {
+}
+.chat ul {
+    background: white;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid rgba(0,0,0,.15);
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    border-bottom: none;
+    height: 300px;
+    overflow-y: auto;
+}
+.chat li {
+    padding-bottom: 5px;
+    margin: 5px 10px 10px;
+    border-bottom: 1px dotted #bbbbbb;
+}
+.chat li.me p {
+    text-align: right;
+}
+.chat li:last-child {
+    border: none;
+    margin-bottom: 0;
+}
+
+.chat li .chat-body p {
+    margin: 0;
+    color: #555;
+}
+.chat .status {
+    padding: 0 10px;
+    font-size: .8em;
+    color: #ccc;
+    border-left: 1px solid rgba(0,0,0,.15);
+    border-right: 1px solid rgba(0,0,0,.15);
+    background: white;
+}
+.chat input {
+    border-top-left-radius: 0;
+}
+.chat button {
+    border-top-right-radius: 0;
+}

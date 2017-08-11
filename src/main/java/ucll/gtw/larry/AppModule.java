@@ -8,6 +8,8 @@ import ucll.gtw.larry.controller.*;
 import ucll.gtw.larry.domain.blog.CommentRepository;
 import ucll.gtw.larry.domain.blog.DummyBlogData;
 import ucll.gtw.larry.domain.blog.PostRepository;
+import ucll.gtw.larry.domain.chat.DummyChatData;
+import ucll.gtw.larry.domain.chat.MessageRepository;
 import ucll.gtw.larry.domain.shop.DummyShopData;
 import ucll.gtw.larry.domain.shop.ProductRepository;
 import ucll.gtw.larry.domain.user.DummyUserData;
@@ -51,10 +53,15 @@ public class AppModule {
         pico.addComponent(postRepository);
         pico.addComponent(commentRepository);
 
+        MessageRepository messageRepository = new MessageRepository(userRepository);
+        DummyChatData.addData(messageRepository);
+        pico.addComponent(messageRepository);
+
         // controllers
         pico.addComponent(ProductController.class);
         pico.addComponent(ShopController.class);
         pico.addComponent(UserController.class);
+        pico.addComponent(ChatController.class);
 
         // Router
         pico.addComponent(Router.class);

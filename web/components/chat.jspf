@@ -1,0 +1,77 @@
+<c:if test="${user.role == 'USER'}">
+    <div class="chat">
+        <ul>
+        </ul>
+        <div class="status">
+        </div>
+        <div>
+            <form name="chat" action="/chat">
+                <div class="input-group">
+                    <input type="text" name="message" class="form-control input-sm" placeholder="Type your message here..." required="required" />
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-warning btn-sm">Send</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</c:if>
+<c:if test="${user.role == 'SUPPORT'}">
+    <div id="chats" role="tablist" aria-multiselectable="true">
+    </div>
+    <script id="chat-template" type="javascript-template">
+        <div class="card">
+            <div class="card-header" role="tab" id="headingOne">
+                <h5 class="mb-0">
+                    <a data-toggle="collapse" data-parent="#chats" href="#chatuser0" aria-expanded="true" aria-controls="collapseOne" class="chatheader">
+                        ChatHeader
+                    </a>
+                </h5>
+            </div>
+
+            <div id="chatuser0" class="collapse chat" role="tabpanel">
+                <ul>
+                </ul>
+                <div class="status">
+                </div>
+                <div>
+                    <form name="chat" action="/chat">
+                        <input type="hidden" name="toUserId" value="">
+                        <div class="input-group">
+                            <input type="text" name="message" class="form-control input-sm" placeholder="Type your message here..." required="required" />
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-warning btn-sm">Send</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </script>
+</c:if>
+<script id="chat-other-template" type="javascript-template">
+    <li class="left clearfix">
+        <div class="chat-body clearfix">
+            <div class="header">
+                <strong class="primary-font">Support</strong>
+                <small class="float-right text-muted">
+                    <time class="timeago" datetime=""></time>
+                </small>
+            </div>
+            <p class="messagecontent"></p>
+        </div>
+    </li>
+</script>
+<script id="chat-me-template" type="javascript-template">
+    <li class="right clearfix me">
+        <div class="chat-body clearfix">
+            <div class="header">
+                <small class="text-muted">
+                    <time class="timeago" datetime=""></time>
+                </small>
+                <strong class="float-right primary-font">Me</strong>
+            </div>
+            <p class="messagecontent"></p>
+        </div>
+    </li>
+</script>

@@ -4,6 +4,7 @@ import lombok.*;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data public class User {
     private int userId;
@@ -13,9 +14,10 @@ import java.time.LocalDate;
     @NonNull private String email;
     @NonNull private Gender gender;
     @NonNull private Role role;
-    @NonNull private LocalDate dateOfBirth;
+    @NonNull private transient LocalDate dateOfBirth;
+    private LocalDateTime lastOnline = java.time.LocalDateTime.now();
     // hashed password with salt, see https://en.wikipedia.org/wiki/Bcrypt
-    @Setter(AccessLevel.PACKAGE) private String hashedPassword;
+    @Setter(AccessLevel.PACKAGE) private transient String hashedPassword;
 
     private static int BCRYPT_LOG_ROUNDS = 12;
 
@@ -32,5 +34,9 @@ import java.time.LocalDate;
             return false;
         }
         return BCrypt.checkpw(password, getHashedPassword());
+    }
+
+    public void wasOnline(){
+        this.lastOnline = java.time.LocalDateTime.now();
     }
 }

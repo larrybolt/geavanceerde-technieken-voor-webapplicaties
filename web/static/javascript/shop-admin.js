@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     })
 
     document.getElementById('addproduct').addEventListener('submit', function(e) {
+        var form = this;
         e.preventDefault(); // stop the form from actually submitting
 
         // a good enough form-serialise for this case
@@ -30,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             : this.stockstatus.value;
 
         ajaxCall('POST', this.action, JSON.stringify(postData)).then(function(res){
+            form.reset();
         }, function(err){
             console.log('Error happened', err);
         });

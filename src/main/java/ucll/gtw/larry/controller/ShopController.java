@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import ucll.gtw.larry.domain.chat.MessageRepository;
 import ucll.gtw.larry.domain.shop.Product;
 import ucll.gtw.larry.domain.shop.ProductRepository;
 import ucll.gtw.larry.domain.user.User;
@@ -18,16 +19,19 @@ import java.util.ArrayList;
 
 public class ShopController extends BaseController {
     @Getter private ProductRepository productRepository;
+    @Getter private MessageRepository messageRepository;
 
-    public ShopController(UserRepository userRepository, ProductRepository productRepository) {
+    public ShopController(UserRepository userRepository, ProductRepository productRepository, MessageRepository messageRepository) {
         super(userRepository);
         this.productRepository = productRepository;
+        this.messageRepository = messageRepository;
     }
 
     public void handleIndex(HttpServletRequest request, HttpServletResponse response) {
         try {
-            if (isLoggedIn(request, response)) {
+            if (isLoggedIn(request)) {
 
+                request.setAttribute("messages", getMessageRepository().getForUser(getUser(request)));
                 request.setAttribute("products", getProductRepository().getFrom(0));
                 request.setAttribute("products_lastupdatetimestamp", getProductRepository().getLastUpdateTimeStamp());
                 request.getRequestDispatcher("/shop.jsp").forward(request, response);

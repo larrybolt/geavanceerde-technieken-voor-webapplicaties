@@ -30,8 +30,9 @@
 
     <div class="row">
 
-        <div class="col-lg-3">
+        <div class="col-md-3">
 
+            <%@ include file="components/chat.jspf" %>
             <c:if test="${user.role == 'ADMIN'}">
                 <h3>Add Product</h3>
                 <hr>
@@ -73,7 +74,7 @@
         </div>
         <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9">
+        <div class="col-md-9">
 
             <div class="row" data-lastupdatetimestamp="${products_lastupdatetimestamp}" id="products">
 
@@ -99,4 +100,5 @@
 <c:if test="${user.role == 'ADMIN'}">
 <script src="/static/javascript/shop-admin.js"></script>
 </c:if>
+<script src="/static/javascript/shop-chat.js" defer="defer"></script>
 <%@ include file="components/footer.jspf"%>
