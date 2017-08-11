@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
     @NonNull private String email;
     @NonNull private Gender gender;
     @NonNull private Role role;
-    @NonNull private transient LocalDate dateOfBirth;
+    @NonNull private LocalDate dateOfBirth;
     private LocalDateTime lastOnline = java.time.LocalDateTime.now();
     // hashed password with salt, see https://en.wikipedia.org/wiki/Bcrypt
     @Setter(AccessLevel.PACKAGE) private transient String hashedPassword;
