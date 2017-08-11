@@ -1,6 +1,6 @@
 <small class="text-muted">
     <span class="stocktext"><c:out value="${product.stock}"></c:out></span>
-    <a href="#" onclick="editproductstock(this)">(edit)</a>
+    <a href="#" onclick="return editproductstock(this)">(edit)</a>
 </small>
 <div class="productstockedit hidden">
     <div class="form-group">

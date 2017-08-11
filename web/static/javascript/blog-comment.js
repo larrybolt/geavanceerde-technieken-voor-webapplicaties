@@ -2,12 +2,10 @@ var ws;
 document.addEventListener("DOMContentLoaded", function(event) {
     ws = new WebSocket("ws://"+window.location.host+"/");
     ws.onopen = function(ev) {
-        console.log("Socket connected", ev);
     }
     ws.onmessage = function(ev) {
         try {
             var message = JSON.parse(ev.data);
-            console.log("Received mesasge", message);
             addComment(message);
         } catch (e) {}
     }
@@ -16,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 function postComment(el) {
-    console.log(arguments);
     var form = el;
     var comment = form.comment.value, name = form.name.value, postId = form.postId.value;
     form.reset();

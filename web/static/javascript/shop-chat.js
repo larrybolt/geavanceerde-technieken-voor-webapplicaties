@@ -1,5 +1,4 @@
 jQuery(function($) {
-    console.log("ready!");
     $('body').on('submit', '.chat form', function(ev){
         ev.preventDefault();
         var postData = {};
@@ -24,10 +23,9 @@ function getLatestMessages(last){
         type: "GET",
         url: '/chat?last='+last
     }).then(function(res){
-        var messages = JSON.parse(res);
+        var messages = res;
         if (messages.length > 0) {
             last = messages[messages.length-1].MessageId;
-            console.log(messages, last);
             appendLatestMessages(messages);
         }
         setTimeout(function() {
@@ -39,11 +37,9 @@ function getLatestMessages(last){
 function appendLatestMessages(messages){
     for (var i = 0; i<messages.length; i++){
         var message = messages[i];
-        var $template = message.from.role === 'USER' ?
-            $($('#chat-me-template').html()) :
-            $($('#chat-other-template').html());
 
         var chatcontainer;
+        var $template;
 
         if ($('#chats').length > 0) {
             // we are a support user
@@ -59,8 +55,17 @@ function appendLatestMessages(messages){
                     .appendTo('#chats');
             }
             chatcontainer = '#chatuser'+userId+' ul';
+            $template = message.from.role === 'SUPPORT' ?
+                $($('#chat-me-template').html()) :
+                $($('#chat-other-template').html());
+            if (message.from.role === 'USER') {
+                $template.find('strong').text('User');
+            }
         } else {
             chatcontainer = '.chat ul';
+            $template = message.from.role === 'USER' ?
+                $($('#chat-me-template').html()) :
+                $($('#chat-other-template').html());
         }
 
         $template
@@ -72,7 +77,7 @@ function appendLatestMessages(messages){
             .hide()
             .fadeIn('slow');
     }
-    $(".chat ul").animate({ scrollTop: $('.chat ul').prop("scrollHeight")}, 1000);
+    $(chatcontainer).animate({ scrollTop: $(chatcontainer).prop("scrollHeight")}, 1000);
     $('time').timeago();
 }
 

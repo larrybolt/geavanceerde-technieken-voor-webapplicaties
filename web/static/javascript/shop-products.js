@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-    console.log('ready');
     // this contains the timestamp after first render
     var product_lastupdatetimestamp = parseInt(document.getElementById('products').getAttribute('data-lastupdatetimestamp'));
 

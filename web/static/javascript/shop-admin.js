@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-    console.log('ready');
 
     // VanillaJS code to show the custom stock status field when custom is selected in the dropdown list
     var customStockStatus = document.getElementById('customstockstatus')
@@ -33,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         ajaxCall('POST', this.action, JSON.stringify(postData)).then(function(res){
             form.reset();
         }, function(err){
-            console.log('Error happened', err);
         });
     })
 });
@@ -54,7 +52,6 @@ function stockstatuschange(el, custom_submit) {
     }
     if (submit) {
         productId = findAncestorByClassName(el, 'product').getAttribute('data-productid');
-        console.log('change stock', productId, value);
         ajaxCall('POST', '/products/'+productId, { stock: value}).then(function(res){
 
         }, function(err){
@@ -65,6 +62,7 @@ function stockstatuschange(el, custom_submit) {
 
 function editproductstock(el) {
     unHideField(el.parentElement.parentElement.getElementsByClassName('productstockedit')[0]);
+    return false;
 }
 
 function hideField(field){
