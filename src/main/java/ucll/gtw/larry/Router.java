@@ -56,6 +56,10 @@ public class Router {
                 chatController.handle(requestAction, request, response);
                 break;
 
+            case "users":
+                userController.handle(requestAction, request, response);
+                break;
+
             case "products.json":
                 shopController.getJSONProducts(request, response);
                 break;

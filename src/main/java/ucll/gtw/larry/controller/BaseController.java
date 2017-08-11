@@ -39,6 +39,15 @@ public class BaseController {
         }
     }
 
+    protected boolean isValidInt(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     protected boolean isAjax(HttpServletRequest request) {
         return request.getHeader("X-Requested-With") != null;
     }

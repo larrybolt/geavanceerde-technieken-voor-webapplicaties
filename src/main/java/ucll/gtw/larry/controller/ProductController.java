@@ -62,6 +62,7 @@ public class ProductController extends BaseController {
             if (productChanges.getStock() != null)
                 product.setStock(productChanges.getStock());
             getProductRepository().update(product);
+            response.setContentType("application/json");
             response.getWriter().write("{\"success\":true}");
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,6 +71,7 @@ public class ProductController extends BaseController {
 
     private void handleReadAll(HttpServletRequest request, HttpServletResponse response) {
         try {
+            response.setContentType("application/json");
             Writer writer = response.getWriter();
             String lastString = request.getParameter("last");
             int last = 0;
@@ -94,6 +96,7 @@ public class ProductController extends BaseController {
                 String payload = request.getReader().lines().collect(Collectors.joining());
                 Product newProduct = new Gson().fromJson(payload, Product.class);
                 getProductRepository().add(newProduct);
+                response.setContentType("application/json");
                 response.getWriter().write("{\"success\":true}");
             } else {
                 response.getWriter().write("hi not ajax!");
@@ -103,12 +106,4 @@ public class ProductController extends BaseController {
         }
     }
 
-    private boolean isValidInt(String s) {
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 }

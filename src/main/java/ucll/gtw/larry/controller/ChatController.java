@@ -53,6 +53,7 @@ public class ChatController extends BaseController {
         Writer writer = null;
         try {
             if (getUser(request).getRole() != Role.ADMIN) {
+                response.setContentType("application/json");
                 writer.write("{\"error\": \"Only administrators can get a list of all users\"}");
                 return;
             }
@@ -78,6 +79,7 @@ public class ChatController extends BaseController {
             ArrayList<Message> messages = getMessageRepository().getForUser(getUser(request), last);
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
+            response.setContentType("application/json");
             writer.write(gson.toJson(messages));
         } catch (IOException e) {
             e.printStackTrace();
@@ -103,6 +105,7 @@ public class ChatController extends BaseController {
                     toUserId = getMessageRepository().getSupportUserIdForUser(fromUserId);
                 }
                 getMessageRepository().add(fromUserId, toUserId, message);
+                response.setContentType("application/json");
                 response.getWriter().write("{\"success\":true}");
             } else {
                 response.getWriter().write("hi not ajax!");

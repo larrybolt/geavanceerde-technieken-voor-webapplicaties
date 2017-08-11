@@ -1,5 +1,6 @@
 package ucll.gtw.larry.controller;
 
+import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import ucll.gtw.larry.domain.blog.PostRepository;
@@ -128,6 +129,28 @@ public class UserController extends BaseController {
             }
         } catch (ServletException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handle(String requestAction, HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        try {
+            if (requestAction.equals("") && request.getMethod().equals("GET")) {
+                handleReadAll(request, response);
+            } else if (isValidInt(requestAction) && request.getMethod().equals("POST")) {
+            } else if (requestAction.equals("all")) {
+            }
+            else {
+                response.getWriter().write("action" + requestAction);
+            }
+        } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    private void handleReadAll(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            response.getWriter().write(new Gson().toJson(getUserRepository().getAll()));
         } catch (IOException e) {
             e.printStackTrace();
         }

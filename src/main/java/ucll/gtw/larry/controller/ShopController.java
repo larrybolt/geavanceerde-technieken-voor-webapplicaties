@@ -55,6 +55,7 @@ public class ShopController extends BaseController {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             Writer writer = response.getWriter();
+            response.setContentType("application/json");
             writer.write(gson.toJson(getProductRepository().getFrom(from)));
         } catch (IOException e) {
             e.printStackTrace();
