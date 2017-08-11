@@ -29,7 +29,6 @@ public class AppWebSocket {
 
     @OnOpen
     public void onOpen(Session session){
-        System.out.println(session.getId() + " has opened a connection");
         sendMessageToAll("User has connected");
         try {
             session.getBasicRemote().sendText("Connection Established");
@@ -42,7 +41,6 @@ public class AppWebSocket {
     @OnMessage
     public void onMessage(String message, Session session){
         Gson gson = new Gson();
-        System.out.println("Message from " + session.getId() + ": " + message);
         Comment comment = gson.fromJson(message, Comment.class);
         Properties data = gson.fromJson(message, Properties.class);
         int postId = Integer.parseInt(data.getProperty("postId"));
@@ -55,7 +53,6 @@ public class AppWebSocket {
 
     @OnClose
     public void onClose(Session session){
-        System.out.println("Chat " +session.getId()+" has ended");
         sessions.remove(session);
     }
 

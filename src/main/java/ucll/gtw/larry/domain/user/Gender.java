@@ -1,6 +1,15 @@
 package ucll.gtw.larry.domain.user;
 
 public enum Gender {
-    MALE,
-    FEMALE
+    MALE("Male"),
+    FEMALE("Female");
+
+    private String gender;
+    Gender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getGender(){
+        return this.gender;
+    }
 }
