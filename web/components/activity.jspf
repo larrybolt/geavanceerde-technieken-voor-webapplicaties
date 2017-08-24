@@ -1,0 +1,9 @@
+<div class="col-lg-4 col-md-6 mb-4 activity" data-activityid="${activity.activityId}">
+    <p>
+        ${activity.day} -
+        ${activity.time} -
+        ${activity.sport} -
+        ${activity.name} -
+        ${activity.location}
+    </p>
+</div>

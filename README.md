@@ -9,3 +9,4 @@ https://projectlombok.org/features/
 
 Passwords should be hashed using bCrypt
 
+Exam assignment in last commit

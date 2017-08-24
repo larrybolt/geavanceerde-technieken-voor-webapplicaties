@@ -15,6 +15,9 @@
                     <a class="nav-link" href="/">Shop <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/sport">Sport <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/logout">Logout, ${user.userName}</a>
                 </li>
             </ul>

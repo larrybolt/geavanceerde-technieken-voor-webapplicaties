@@ -62,6 +62,7 @@ public class AppModule {
         pico.addComponent(ShopController.class);
         pico.addComponent(UserController.class);
         pico.addComponent(ChatController.class);
+        pico.addComponent(SportController.class);
 
         // Router
         pico.addComponent(Router.class);

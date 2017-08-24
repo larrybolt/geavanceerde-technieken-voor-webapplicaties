@@ -11,6 +11,9 @@
             <a class="navbar-brand" href="#">WebShop</a>
             <div class="collapse navbar-collapse" id="navbarExample">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sport">Sport</a>
+                    </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
                     </li>
